@@ -17,52 +17,77 @@ namespace ElohimMare.Server
         {
             connection = new LdapConnection(url);
         }
-        public string SearchForEntry(string entry)
+        public List<Student> LoadAllStudents()
         {
-            //var request = new SearchRequest("ou=STUDENTS,dc=ldap,dc=ru,dc=ac,dc=za", "(objectClass=simpleSecurityObject)", SearchScope.Subtree, null);
-            //var response = (SearchResponse)connection.SendRequest(request);
-            //foreach (SearchResultEntry e in response.Entries)
-            //{
-            //    Console.WriteLine(e.ToString());
-            //    //Process the entries
-            //}
-            
+            List<Student> students = new List<Student>();
             DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://ldap.ru.ac.za/ou=STUDENT,o=RU", "", "", AuthenticationTypes.Anonymous);
-            //directoryEntry.Path = "LDAP://ldap.ru.ac.za/OU=STUDENT,O=RU,dc=ldap,dc=ru,dc=ac,dc=za";
-            //directoryEntry.Path = "LDAP://ldap.ru.ac.za/OU=STUDENT,O=RU,dc=ldap,dc=ru";
             DirectorySearcher searcher = new DirectorySearcher(directoryEntry)
             {
                 PageSize = int.MaxValue,
                 Filter = "(&(objectClass=*))"
             };
 
-            //searcher.PropertiesToLoad.Add("sn");
-            //var r = directoryEntry.NativeGuid;
-            //Console.WriteLine(r);
-            //Console.ReadKey();
-            //var result = searcher.FindAll();
             SearchResultCollection found = searcher.FindAll();
+
             foreach (SearchResult l in found)
             {
                 //var result = l.Key;
-
+                Student s = new Student();
+                StringBuilder sb = new StringBuilder();
                 foreach (DictionaryEntry p in l.Properties)
                 {
+                    //Console.WriteLine(String.Format("{0}:{1}", p.Key, ((ResultPropertyValueCollection)p.Value)[0]));
+                    ResultPropertyValueCollection a = (ResultPropertyValueCollection)p.Value;
+                    switch (p.Key.ToString())
+                    {
+                        case "uid":
+                            s.studentNumber = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "initials":
+                            s.initials = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "mail":
+                            s.mail = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "fullname":
+                            s.fullName = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "sn":
+                            s.surname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "allowunlimitedcredit":
+                            s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "preferredname":
+                            s.preferredName = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "homedirectory":
+                            s.homeDirectory = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "loginexpirationtime":
+                            s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "logindisabled":
+                            s.loginDisabled = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "accesscardnumber":
+                            s.accessCardNumber = Convert.ToInt32(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
 
-                    Console.WriteLine(String.Format("{0}:{1}", p.Key, ((ResultPropertyValueCollection)p.Value)[0]));
-
+                    }
+                    for(int i = 0; i< a.Count; i++)
+                    {
+                        sb.Append(p.Key).Append(">").Append(a[i]).Append(":");
+                    }
+                    sb.Append("\n");
                 }
-                Console.WriteLine("");
+                s.stuff = sb.ToString();
+
+                students.Add(s);
             }
 
-           
-            //string surname;
-            //
-            //if (result.Properties.Contains("sn"))
-            //{
-            //    surname = result.Properties["sn"][0].ToString();
-            //}
-            return "";
+        
+            return students;
         }
     }
 }
