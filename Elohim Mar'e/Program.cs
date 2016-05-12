@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Schema;
+﻿using ElohimMare.Server;
+using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace ElohimMare
     {
         static void Main(string[] args)
         {
+            (new LDAPManager()).SearchForEntry("g16g2513");
+            Console.ReadKey();
         }
     }
 

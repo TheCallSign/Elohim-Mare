@@ -65,6 +65,8 @@
     <Build Include="Students.sql" />
     <Build Include="WlanDevices.sql" />
     <Build Include="WlanInfo.sql" />
+    <Build Include="StaticHostnames.sql" />
+    <Build Include="ResnetInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SightBase.refactorlog" />
