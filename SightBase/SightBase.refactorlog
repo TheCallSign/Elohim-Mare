@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="6946e48d-e12b-443d-a945-15b8520e1b41" ChangeDateTime="05/12/2016 12:51:23">
+    <Property Name="ElementName" Value="[dbo].[Students].[Firstname]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Students]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Firstnames" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="786617ab-0a39-416e-b9e9-79eed734d02c" ChangeDateTime="05/12/2016 12:57:17">
+    <Property Name="ElementName" Value="[dbo].[WlanInfo].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WlanInfo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EntryID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="108bfc5a-df85-4731-a76f-4895da163d8e" ChangeDateTime="05/12/2016 12:57:35">
+    <Property Name="ElementName" Value="[dbo].[WlanDevices].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WlanDevices]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeviceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c8e9f4ac-d8c8-481a-90bc-b54247ca023f" ChangeDateTime="05/12/2016 12:57:52">
+    <Property Name="ElementName" Value="[dbo].[WlanDevices].[DeviceId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WlanDevices]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeviceID" />
+  </Operation>
+</Operations>
