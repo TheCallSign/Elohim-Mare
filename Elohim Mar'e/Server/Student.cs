@@ -21,7 +21,8 @@ namespace ElohimMare.Server
         public bool loginDisabled { get; set; }
         public int accessCardNumber  { get; set; }
         public bool allowUnlimitedCredit  { get; set; } //idk what this is
-        public string stuff;
+        public string stuff { get; set; }
+        public string student { get; set; }
         override public string ToString()
         {
             return String.Format("{0}: {1}, {2}, {3}, {4}", fullName, studentNumber, mail, accessCardNumber, loginDisabled);
