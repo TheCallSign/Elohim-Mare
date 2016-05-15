@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElohimMare.EMServer
+namespace ElohimMare.EMBackend
 {
     class LDAPManager
     {
