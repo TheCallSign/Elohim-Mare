@@ -22,7 +22,7 @@ namespace ElohimMare.Server
         public int accessCardNumber  { get; set; }
         public bool allowUnlimitedCredit  { get; set; } //idk what this is
         public string stuff { get; set; }
-        public string student { get; set; }
+        public string adsPath { get; set; }
         override public string ToString()
         {
             return String.Format("{0}: {1}, {2}, {3}, {4}", fullName, studentNumber, mail, accessCardNumber, loginDisabled);
