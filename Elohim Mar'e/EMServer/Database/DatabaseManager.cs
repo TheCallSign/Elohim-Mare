@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElohimMare.Server
+namespace ElohimMare.EMServer
 {
     class DatabaseManager
     {
         SqlConnection connection;
         public DatabaseManager()
         {
-            connection = new SqlConnection();
         }
     }
 }
