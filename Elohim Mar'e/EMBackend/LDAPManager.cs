@@ -61,9 +61,6 @@ namespace ElohimMare.EMBackend
                         case "preferredname":
                             s.preferredName = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
-                        case "homedirectory":
-                            s.homeDirectory = ((ResultPropertyValueCollection)p.Value)[0].ToString();
-                            break;
                         case "loginexpirationtime":
                             s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
                             break;
