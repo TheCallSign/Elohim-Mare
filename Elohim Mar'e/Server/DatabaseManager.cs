@@ -12,7 +12,7 @@ namespace ElohimMare.Server
         SqlConnection connection;
         public DatabaseManager()
         {
-            connection = = new SqlConnection();
+            connection = new SqlConnection();
         }
     }
 }
