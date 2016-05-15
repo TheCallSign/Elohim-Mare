@@ -22,7 +22,7 @@ namespace ElohimMare.EMBackend
         public int accessCardNumber  { get; set; }
         public bool allowUnlimitedCredit  { get; set; } //idk what this is
         public string stuff { get; set; }
-        public string adsPath { get; set; }
+        public string adsPath { get; set; } // direct path to student in LDAP
         override public string ToString()
         {
             return String.Format("{0}: {1}, {2}, {3}, {4}", fullName, studentNumber, mail, accessCardNumber, loginDisabled);
