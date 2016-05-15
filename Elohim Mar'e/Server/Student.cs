@@ -13,7 +13,7 @@ namespace ElohimMare.Server
         public string surname { get; set; }
         public string preferredName { get; set; } 
         public string studentNumber { get; set; } // pretty much the student number but with the 'g' prefix.
-        public string workdForceID { get; set; }  //workdForceID
+        public string workForceID { get; set; }  //workdForceID
         public string mail { get; set; } 
         public string initials { get; set; }
         public string homeDirectory { get; set; }
