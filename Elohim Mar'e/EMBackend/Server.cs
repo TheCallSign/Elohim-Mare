@@ -11,6 +11,7 @@ namespace ElohimMare.EMBackend
         private DatabaseManager dm;
         private LDAPManager ldapm;
         private List<Student> studentList = new List<Student>();
+        private List<Staff> staffList = new List<Staff>();
 
         public Server()
         {
@@ -22,6 +23,12 @@ namespace ElohimMare.EMBackend
         {
             studentList.Clear();
             studentList = (new LDAPManager()).LoadAllStudents();
+        }
+
+        public void RefreshStaffList()
+        {
+            staffList.Clear();
+            staffList = (new LDAPManager()).LoadAllStaff();
         }
 
         public void StartConsole()
@@ -46,6 +53,9 @@ namespace ElohimMare.EMBackend
                     case 's':
                         Console.WriteLine(SearchStudentNumber(studentList, Console.ReadLine()));
                         break;
+                    case 'S':
+                        Console.WriteLine(SearchStaffNumber(staffList, Console.ReadLine()));
+                        break;
                     case 'f':
                         Console.WriteLine(studentList.Where(x => {
                             string input = Console.ReadLine().ToLower();
@@ -54,7 +64,7 @@ namespace ElohimMare.EMBackend
                         break;
                     case 'h':
                     case '?':
-                        Console.WriteLine("s : Student number search\nf : Name (First or last) search\nR : Reinit the database\nl : Reload in-memory list of students");
+                        Console.WriteLine("s : Student number search\nS : Staff number search\nf : Name (First or last) search\nR : Reinit the database\nl : Reload in-memory list of students/staff");
                         break;
                     case 'R':
                         Console.WriteLine("Reinitialize the database? [N/y]?");
@@ -72,12 +82,13 @@ namespace ElohimMare.EMBackend
                         {
                             dm.AddStudent(s);
                         }
-                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
+                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students and {1} staff loaded.", studentList.Count, staffList.Count));
                         break;
                     case 'l':
-                        Console.WriteLine("Refreshing Student List with LDAP Server");
+                        Console.WriteLine("Refreshing Student/Staff List with LDAP Server");
                         RefreshStudentList();
-                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
+                        RefreshStaffList();
+                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students and {1} staff loaded.", studentList.Count, staffList.Count));
                         break;
 
                 }
@@ -87,6 +98,10 @@ namespace ElohimMare.EMBackend
         private string SearchStudentNumber(List<Student> s, string search)
         {
             return s.Where(x => x.studentNumber == search).FirstOrDefault().ToString();
+        }
+        private string SearchStaffNumber(List<Staff> s, string search)
+        {
+            return s.Where(x => x.staffNumber == search).FirstOrDefault().ToString();
         }
 
         public void Shutdown()

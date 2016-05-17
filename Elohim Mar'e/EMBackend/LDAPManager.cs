@@ -73,20 +73,74 @@ namespace ElohimMare.EMBackend
                             break;
                     }
                 }
-<<<<<<< HEAD
                 string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber).Append(".htm").ToString();
                 s.timeTable = _a.ToString();
                 students.Add(s);              
-=======
-                string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
-                s.timeTable = _a.ToString();
-                s.stuff = sb.ToString();
-                students.Add(s);
->>>>>>> fd8c6ba776d20d3585924802cf74d905642f38d6
             }
             searcher.Dispose();
             directoryEntry.Dispose();
             return students;
+        }
+
+        public List<Staff> LoadAllStaff()
+        {
+            List<Staff> staff = new List<Staff>();
+            DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://ldap.ru.ac.za/ou=STAFF,o=RU", "", "", AuthenticationTypes.Anonymous); // directory of where are we looking in the ldap, logging in anonymously
+            DirectorySearcher searcher = new DirectorySearcher(directoryEntry) { PageSize = 500, Filter = "(&(objectClass=*))" }; // search through the directory
+
+            searcher.Asynchronous = true;
+            SearchResultCollection found = searcher.FindAll(); // The final list of all the found staff in the ldap
+
+            foreach (SearchResult l in found)
+            {
+                Staff s = new Staff(); // creating a new staff list
+                foreach (DictionaryEntry p in l.Properties)
+                {
+             
+                    ResultPropertyValueCollection a = (ResultPropertyValueCollection)p.Value;
+
+                    switch (p.Key.ToString())
+                    {
+                        case "uid":
+                            s.staffNumber= ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "initials":
+                            s.initials = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "mail":
+                            s.mail = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "fullname":
+                            s.fullname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "sn":
+                            s.surname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "ou":
+                            s.department = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "title":
+                            s.title = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "allowunlimitedcredit":
+                            s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "loginexpirationtime":
+                            s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "logindisabled":
+                            s.loginDisabled = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                        case "accesscardnumber":
+                            s.accessCardNumber = Convert.ToInt32(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            break;
+                    }
+                }
+                staff.Add(s);
+            }
+            searcher.Dispose();
+            directoryEntry.Dispose();
+            return staff;
         }
     }
 }
