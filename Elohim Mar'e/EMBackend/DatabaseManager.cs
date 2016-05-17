@@ -50,7 +50,7 @@ namespace ElohimMare.EMBackend
             command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?)";
             command.Parameters.Add(new SQLiteParameter("studentnumber", s.studentNumber));
             command.Parameters.Add(new SQLiteParameter("surname", s.surname));
-            command.Parameters.Add(new SQLiteParameter("fullname", s.fullName));
+            command.Parameters.Add(new SQLiteParameter("fullname", s.fullname));
             command.Parameters.Add(new SQLiteParameter("initials", s.initials));
             command.Parameters.Add(new SQLiteParameter("mail", s.mail));
             command.Parameters.Add(new SQLiteParameter("loginexpiration", s.loginExpiration));

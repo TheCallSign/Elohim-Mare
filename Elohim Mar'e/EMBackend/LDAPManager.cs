@@ -51,16 +51,13 @@ namespace ElohimMare.EMBackend
                             s.mail = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "fullname":
-                            s.fullName = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.fullname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "sn":
                             s.surname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "allowunlimitedcredit":
                             s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
-                            break;
-                        case "preferredname":
-                            s.preferredName = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "loginexpirationtime":
                             s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
@@ -75,7 +72,7 @@ namespace ElohimMare.EMBackend
                 }
                 string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber).Append(".htm").ToString();
                 s.timeTable = _a.ToString();
-                students.Add(s);              
+                students.Add(s);
             }
             searcher.Dispose();
             directoryEntry.Dispose();
@@ -102,7 +99,7 @@ namespace ElohimMare.EMBackend
                     switch (p.Key.ToString())
                     {
                         case "uid":
-                            s.staffNumber= ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.staffUID= ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "initials":
                             s.initials = ((ResultPropertyValueCollection)p.Value)[0].ToString();
@@ -121,6 +118,9 @@ namespace ElohimMare.EMBackend
                             break;
                         case "title":
                             s.title = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            break;
+                        case "telephoneNumber":
+                            s.telNumber = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "allowunlimitedcredit":
                             s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());

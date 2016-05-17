@@ -8,10 +8,9 @@ namespace ElohimMare.EMBackend
 {
     class Student 
     {
-        public string fullName { get; set; } = "";
-        public string givenName { get; set; } = "";
+        public string fullname { get; set; } = "";
+        public string firstnames { get; set; } = "";
         public string surname { get; set; } = "";
-        public string preferredName { get; set; } = "";
         public string studentNumber { get; set; } = ""; // pretty much the student number but with the 'g' prefix.
         public string mail { get; set; } = "";
         public string initials { get; set; } = "";
@@ -20,11 +19,10 @@ namespace ElohimMare.EMBackend
         public bool loginDisabled { get; set; }
         public int accessCardNumber  { get; set; }
         public bool allowUnlimitedCredit  { get; set; } //idk what this is
-        public string adsPath { get; set; } // direct path to student in LDAP
         public string timeTable { get; set; } //students timetable
         override public string ToString()
         {
-            return String.Format("{0}: {1}, {2}, {3}, {4}, {5}", fullName, studentNumber, mail, accessCardNumber, loginDisabled, timeTable);
+            return String.Format("Fullname: {0} \nStudentNumber: {1} \nMail: {2} \nAccessCardNumber{3} \nLoginDisabled: {4} \nTimeTable: {5}", fullname, studentNumber, mail, accessCardNumber, loginDisabled, timeTable);
         }
     } 
 }
