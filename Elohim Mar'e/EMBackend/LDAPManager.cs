@@ -84,7 +84,6 @@ namespace ElohimMare.EMBackend
             List<Staff> staff = new List<Staff>();
             DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://ldap.ru.ac.za/ou=STAFF,o=RU", "", "", AuthenticationTypes.Anonymous); // directory of where are we looking in the ldap, logging in anonymously
             DirectorySearcher searcher = new DirectorySearcher(directoryEntry) { PageSize = 500, Filter = "(&(objectClass=*))" }; // search through the directory
-
             searcher.Asynchronous = true;
             SearchResultCollection found = searcher.FindAll(); // The final list of all the found staff in the ldap
 
@@ -119,7 +118,7 @@ namespace ElohimMare.EMBackend
                         case "title":
                             s.title = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
-                        case "telephoneNumber":
+                        case "telephonenumber":
                             s.telNumber = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                             break;
                         case "allowunlimitedcredit":

@@ -22,7 +22,7 @@ namespace ElohimMare.EMBackend
         public string timeTable { get; set; } //students timetable
         override public string ToString()
         {
-            return String.Format("Fullname: {0} \nStudentNumber: {1} \nMail: {2} \nAccessCardNumber{3} \nLoginDisabled: {4} \nTimeTable: {5}", fullname, studentNumber, mail, accessCardNumber, loginDisabled, timeTable);
+            return String.Format("Fullname: {0} \nStudentNumber: {1} \nMail: {2} \nAccessCardNumber: {3} \nLoginDisabled: {4} \nTimeTable: {5}", fullname, studentNumber, mail, accessCardNumber, loginDisabled, timeTable);
         }
     } 
 }

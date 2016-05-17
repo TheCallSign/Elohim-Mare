@@ -58,11 +58,10 @@ namespace ElohimMare.EMBackend
                             Console.WriteLine(SearchStaffNumber(staffList, Console.ReadLine()));
                             break;
                         case 'f':
-                            Console.WriteLine(studentList.Where(x =>
-                            {
-                                string input = Console.ReadLine().ToLower();
-                                return x.fullname.ToLower().StartsWith(input) || x.surname.ToLower().StartsWith(input);
-                            }).FirstOrDefault().ToString());
+                            Console.WriteLine(SearchStudentName(studentList, Console.ReadLine()));
+                            break;
+                        case 'F':
+                            Console.WriteLine(SearchStaffName(studentList, Console.ReadLine()));
                             break;
                         case 'h':
                         case '?':
@@ -106,9 +105,17 @@ namespace ElohimMare.EMBackend
         {
             return s.Where(x => x.studentNumber == search).FirstOrDefault().ToString();
         }
+        private string SearchStudentName(List<Student> s, string search)
+        {
+            return s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault().ToString();
+        }
         private string SearchStaffNumber(List<Staff> s, string search)
         {
             return s.Where(x => x.staffUID == search).FirstOrDefault().ToString();
+        }
+        private string SearchStaffName(List<Staff> s, string search)
+        {
+            return s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault().ToString();
         }
 
         public void Shutdown()
