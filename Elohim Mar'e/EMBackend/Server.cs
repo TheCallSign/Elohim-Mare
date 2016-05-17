@@ -35,52 +35,59 @@ namespace ElohimMare.EMBackend
             Console.WriteLine("Interactive interpreter ready. [h for help]");
 
             char a = ' ';
-
-            while (a != 'q')
+            try
             {
-                Console.Write("? ");
-                a = Console.ReadKey().KeyChar;
-                Console.WriteLine();
-                switch (a)
+                while (a != 'q')
                 {
-                    case 's':
-                        Console.WriteLine(SearchStudentNumber(studentList, Console.ReadLine()));
-                        break;
-                    case 'f':
-                        Console.WriteLine(studentList.Where(x => {
-                            string input = Console.ReadLine().ToLower();
-                            return x.fullName.ToLower().StartsWith(input) || x.surname.ToLower().StartsWith(input);
-                        }).FirstOrDefault().ToString());
-                        break;
-                    case 'h':
-                    case '?':
-                        Console.WriteLine("s : Student number search\nf : Name (First or last) search\nR : Reinit the database\nl : Reload in-memory list of students");
-                        break;
-                    case 'R':
-                        Console.WriteLine("Reinitialize the database? [N/y]?");
-                        char yn = 'n';
-                        yn = Console.ReadKey().KeyChar;
-                        if (yn != 'n' || yn != 'N')
-                        {
-                            dm.Reinit();
-                        }
-                        continue;
-                    case 'r':
-                        Console.WriteLine("Refreshing Student List with LDAP Server");
-                        RefreshStudentList();
-                        foreach (Student s in studentList)
-                        {
-                            dm.AddStudent(s);
-                        }
-                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
-                        break;
-                    case 'l':
-                        Console.WriteLine("Refreshing Student List with LDAP Server");
-                        RefreshStudentList();
-                        Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
-                        break;
+                    Console.Write("? ");
+                    a = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+                    switch (a)
+                    {
+                        case 's':
+                            Console.WriteLine(SearchStudentNumber(studentList, Console.ReadLine()));
+                            break;
+                        case 'f':
+                            Console.WriteLine(studentList.Where(x =>
+                            {
+                                string input = Console.ReadLine().ToLower();
+                                return x.fullName.ToLower().StartsWith(input) || x.surname.ToLower().StartsWith(input);
+                            }).FirstOrDefault().ToString());
+                            break;
+                        case 'h':
+                        case '?':
+                            Console.WriteLine("s : Student number search\nf : Name (First or last) search\nR : Reinit the database\nl : Reload in-memory list of students");
+                            break;
+                        case 'R':
+                            Console.WriteLine("Reinitialize the database? [N/y]?");
+                            char yn = 'n';
+                            yn = Console.ReadKey().KeyChar;
+                            if (yn != 'n' || yn != 'N')
+                            {
+                                dm.Reinit();
+                            }
+                            continue;
+                        case 'r':
+                            Console.WriteLine("Refreshing Student List with LDAP Server, and writing to database");
+                            RefreshStudentList();
+                            foreach (Student s in studentList)
+                            {
+                                dm.AddStudent(s);
+                            }
+                            Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
+                            break;
+                        case 'l':
+                            Console.WriteLine("Refreshing Student List with LDAP Server");
+                            RefreshStudentList();
+                            Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
+                            break;
 
+                    }
                 }
+            }
+            finally
+            {
+                Shutdown();
             }
         }
 
