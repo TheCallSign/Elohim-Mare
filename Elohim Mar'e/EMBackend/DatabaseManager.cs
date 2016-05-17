@@ -42,6 +42,10 @@ namespace ElohimMare.EMBackend
             string sql = "CREATE TABLE Students(StudentNumber CHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(30) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, timetable VARCHAR(66) )";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
+
+            sql = "CREATE TABLE Staff(uid VARCHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(35) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, title VARCHAR(50), telephone VARCHAR(25), department VARCHAR(40) )";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
         }
 
         public void AddStudent(Student s)
@@ -61,6 +65,24 @@ namespace ElohimMare.EMBackend
             command.ExecuteNonQuery();
         }
 
+        public void AddStaff(Staff s)
+        {
+            SQLiteCommand command = conn.CreateCommand();
+            command.CommandText = "INSERT INTO Staff (uid, Surname, FullName, Initials, mail, loginExpiration, loginDisabled, accessCardNumber, allowUnlimitedCredit, title, telephone, department) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            command.Parameters.Add(new SQLiteParameter("uid", s.staffUID));
+            command.Parameters.Add(new SQLiteParameter("surname", s.surname));
+            command.Parameters.Add(new SQLiteParameter("fullname", s.fullname));
+            command.Parameters.Add(new SQLiteParameter("initials", s.initials));
+            command.Parameters.Add(new SQLiteParameter("mail", s.mail));
+            command.Parameters.Add(new SQLiteParameter("loginexpiration", s.loginExpiration));
+            command.Parameters.Add(new SQLiteParameter("logindiabled", s.loginDisabled));
+            command.Parameters.Add(new SQLiteParameter("accessCardNumber", s.accessCardNumber));
+            command.Parameters.Add(new SQLiteParameter("allowUnlimitedCredit", s.allowUnlimitedCredit));
+            command.Parameters.Add(new SQLiteParameter("title", s.title));
+            command.Parameters.Add(new SQLiteParameter("telephone", s.telNumber));
+            command.Parameters.Add(new SQLiteParameter("department", s.department));
+            command.ExecuteNonQuery();
+        }
         public void Shutdown()
         {
             conn.Close();
