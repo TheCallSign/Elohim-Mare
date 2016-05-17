@@ -42,7 +42,7 @@ namespace ElohimMare.EMBackend
         {
             SQLiteCommand command = conn.CreateCommand();
             command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, cardnumber, workforceid, mail, homedirectory, loginexpiration, logindiabled, accessCardNumber,allowUnlimitedCredit";
-
+            
         }
 
         public void Shutdown()

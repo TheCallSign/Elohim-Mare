@@ -14,12 +14,37 @@ namespace ElohimMare
         static void Main(string[] args)
         {
             List<Student> students = (new LDAPManager()).LoadAllStudents();
-            Console.WriteLine(String.Format("There are {0} undergrad and postgrad students (and/or possible currently staff) at Rhodes.", students.Count));
-            Console.WriteLine("Here is a random one: ");
-            int p = (new Random()).Next(0, students.Count - 1);
-            Console.WriteLine(students[p]);
-            Console.WriteLine(students[p].stuff);
+            Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", students.Count));
+            Console.WriteLine("Interactive interpreter ready. [h for help]");
+            Interpret(students);
             Console.ReadKey();
+        }
+
+        static void Interpret(List<Student> s)
+        {
+            char a = ' ';
+            while (a != 'q')
+            {
+                a = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+                switch (a)
+                {
+                    case 's':
+                        Console.WriteLine(SearchStudentNumber(s, Console.ReadLine()));
+                        break;
+                    case 'f':
+                        Console.WriteLine(s.Where(x => x.studentNumber == Console.ReadLine()).FirstOrDefault().ToString());
+                        break;
+                    case 'h':
+                        Console.WriteLine("s for Student number search\nf for First name search");
+                        break;
+                }
+            }
+        }
+
+        static string SearchStudentNumber(List<Student> s, string search)
+        {
+            return s.Where(x => x.studentNumber == search).FirstOrDefault().ToString();
         }
     }
 
