@@ -23,10 +23,11 @@ namespace ElohimMare.EMBackend
             DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://ldap.ru.ac.za/ou=STUDENT,o=RU", "", "", AuthenticationTypes.Anonymous); // directory of where are we looking in the ldap, logging in anonymously
             DirectorySearcher searcher = new DirectorySearcher(directoryEntry) // search through the directory
             {
-                PageSize = int.MaxValue, //sets limit of entries to max integer value
+                PageSize = 500, //sets limit of entries to max integer value at a time
                 Filter = "(&(objectClass=*))" // at the moment finds all students in ou=Student directory without any filters
             };
 
+            searcher.Asynchronous = true;
             SearchResultCollection found = searcher.FindAll(); // The final list of all the found students in the ldap
 
             foreach (SearchResult l in found)
@@ -79,11 +80,12 @@ namespace ElohimMare.EMBackend
                     sb.Append("\n");
                 }
                 s.stuff = sb.ToString();
-
                 students.Add(s);
+                //string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
+                //s.timeTable = _a.ToString();
             }
-
-        
+            searcher.Dispose();
+            directoryEntry.Dispose();
             return students;
         }
     }
