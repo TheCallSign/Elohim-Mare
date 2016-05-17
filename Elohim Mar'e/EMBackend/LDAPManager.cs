@@ -79,10 +79,10 @@ namespace ElohimMare.EMBackend
                     }
                     sb.Append("\n");
                 }
+                string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
+                s.timeTable = _a.ToString();
                 s.stuff = sb.ToString();
                 students.Add(s);
-                //string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
-                //s.timeTable = _a.ToString();
             }
             searcher.Dispose();
             directoryEntry.Dispose();
