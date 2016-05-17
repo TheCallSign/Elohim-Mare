@@ -34,7 +34,6 @@ namespace ElohimMare.EMBackend
             {
                 //var result = l.Key;
                 Student s = new Student(); // creating a new student list
-                StringBuilder sb = new StringBuilder();
                 foreach (DictionaryEntry p in l.Properties)
                 {
                     //Console.WriteLine(String.Format("{0}:{1}", p.Key, ((ResultPropertyValueCollection)p.Value)[0]));
@@ -73,16 +72,10 @@ namespace ElohimMare.EMBackend
                             s.accessCardNumber = Convert.ToInt32(((ResultPropertyValueCollection)p.Value)[0].ToString());
                             break;
                     }
-                    for(int i = 0; i< a.Count; i++)
-                    {
-                        sb.Append(p.Key).Append(">").Append(a[i]).Append(":");
-                    }
-                    sb.Append("\n");
                 }
-                s.stuff = sb.ToString();
-                students.Add(s);
-                //string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
-                //s.timeTable = _a.ToString();
+                string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber).Append(".htm").ToString();
+                s.timeTable = _a.ToString();
+                students.Add(s);              
             }
             searcher.Dispose();
             directoryEntry.Dispose();
