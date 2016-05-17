@@ -73,9 +73,16 @@ namespace ElohimMare.EMBackend
                             break;
                     }
                 }
+<<<<<<< HEAD
                 string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber).Append(".htm").ToString();
                 s.timeTable = _a.ToString();
                 students.Add(s);              
+=======
+                string _a = (new StringBuilder()).Append("https://scifac.ru.ac.za/timetable/personal/timetables/").Append(s.studentNumber.ToUpper()).Append(".htm").ToString();
+                s.timeTable = _a.ToString();
+                s.stuff = sb.ToString();
+                students.Add(s);
+>>>>>>> fd8c6ba776d20d3585924802cf74d905642f38d6
             }
             searcher.Dispose();
             directoryEntry.Dispose();

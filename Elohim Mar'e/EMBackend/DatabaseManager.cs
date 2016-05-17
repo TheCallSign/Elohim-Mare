@@ -32,6 +32,9 @@ namespace ElohimMare.EMBackend
         }
         public void Reinit()
         {
+            string sql = "DROP TABLE Students";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
             CreateTables();
         }
         private void CreateTables()
@@ -44,7 +47,7 @@ namespace ElohimMare.EMBackend
         public void AddStudent(Student s)
         {
             SQLiteCommand command = conn.CreateCommand();
-            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?)";
             command.Parameters.Add(new SQLiteParameter("studentnumber", s.studentNumber));
             command.Parameters.Add(new SQLiteParameter("surname", s.surname));
             command.Parameters.Add(new SQLiteParameter("fullname", s.fullName));
@@ -55,6 +58,7 @@ namespace ElohimMare.EMBackend
             command.Parameters.Add(new SQLiteParameter("accessCardNumber", s.accessCardNumber));
             command.Parameters.Add(new SQLiteParameter("allowUnlimitedCredit", s.allowUnlimitedCredit));
             command.Parameters.Add(new SQLiteParameter("timetable", s.timeTable));
+            command.ExecuteNonQuery();
         }
 
         public void Shutdown()
