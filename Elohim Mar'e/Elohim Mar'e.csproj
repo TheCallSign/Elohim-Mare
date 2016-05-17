@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EMBackend\DatabaseManager.cs" />
+    <Compile Include="EMBackend\Server.cs" />
     <Compile Include="EMBackend\LDAPManager.cs" />
     <Compile Include="EMBackend\Packet.cs" />
     <Compile Include="Program.cs" />

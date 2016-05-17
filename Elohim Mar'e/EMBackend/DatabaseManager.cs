@@ -30,10 +30,13 @@ namespace ElohimMare.EMBackend
                 conn.Open();
             }
         }
-
+        public void Reinit()
+        {
+            CreateTables();
+        }
         private void CreateTables()
         {
-            string sql = "CREATE TABLE Students(StudentNumber CHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, CardNumber INT NULL, workForceID CHAR(7) NULL, mail VARCHAR(30) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL)";
+            string sql = "CREATE TABLE Students(StudentNumber CHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(30) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, timetable VARCHAR(66) )";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
         }
@@ -41,8 +44,17 @@ namespace ElohimMare.EMBackend
         public void AddStudent(Student s)
         {
             SQLiteCommand command = conn.CreateCommand();
-            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, cardnumber, workforceid, mail, homedirectory, loginexpiration, logindiabled, accessCardNumber,allowUnlimitedCredit";
-            
+            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            command.Parameters.Add(new SQLiteParameter("studentnumber", s.studentNumber));
+            command.Parameters.Add(new SQLiteParameter("surname", s.surname));
+            command.Parameters.Add(new SQLiteParameter("fullname", s.fullName));
+            command.Parameters.Add(new SQLiteParameter("initials", s.initials));
+            command.Parameters.Add(new SQLiteParameter("mail", s.mail));
+            command.Parameters.Add(new SQLiteParameter("loginexpiration", s.loginExpiration));
+            command.Parameters.Add(new SQLiteParameter("logindiabled", s.loginDisabled));
+            command.Parameters.Add(new SQLiteParameter("accessCardNumber", s.accessCardNumber));
+            command.Parameters.Add(new SQLiteParameter("allowUnlimitedCredit", s.allowUnlimitedCredit));
+            command.Parameters.Add(new SQLiteParameter("timetable", s.timeTable));
         }
 
         public void Shutdown()
