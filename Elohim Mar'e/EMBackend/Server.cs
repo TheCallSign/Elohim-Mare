@@ -116,19 +116,19 @@ namespace ElohimMare.EMBackend
 
         private string SearchStudentNumber(List<Student> s, string search)
         {
-            return s.Where(x => x.studentNumber == search).FirstOrDefault().ToString();
+            return (s.Where(x => x.studentNumber == search).FirstOrDefault() ?? new Student()).ToString();
         }
         private string SearchStudentName(List<Student> s, string search)
         {
-            return s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault().ToString();
+            return (s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault() ?? new Student()).ToString();
         }
         private string SearchStaffNumber(List<Staff> s, string search)
         {
-            return s.Where(x => x.staffUID == search).FirstOrDefault().ToString();
+            return (s.Where(x => x.staffUID == search).FirstOrDefault() ?? new Staff()).ToString();
         }
         private string SearchStaffName(List<Staff> s, string search)
         {
-            return s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault().ToString();
+            return (s.Where(x => x.fullname.StartsWith(search)).FirstOrDefault() ?? new Staff()).ToString();
         }
 
         public void Shutdown()
