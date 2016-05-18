@@ -14,7 +14,8 @@ namespace ElohimMare.EMBackend
         public const string DATABASE_NAME = "SightBase_data.db";
         public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
 
-        SQLiteConnection conn;
+        private SQLiteConnection conn;
+
         public DatabaseManager()
         {
             if (!File.Exists(DATABASE_NAME))
@@ -30,13 +31,19 @@ namespace ElohimMare.EMBackend
                 conn.Open();
             }
         }
+
         public void Reinit()
         {
             string sql = "DROP TABLE Students";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
+
+            sql = "DROP TABLE Staff";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
             CreateTables();
         }
+
         private void CreateTables()
         {
             string sql = "CREATE TABLE Students(StudentNumber CHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(30) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, timetable VARCHAR(66) )";
