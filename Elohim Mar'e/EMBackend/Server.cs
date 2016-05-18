@@ -65,7 +65,7 @@ namespace ElohimMare.EMBackend
                             break;
                         case 'h':
                         case '?':
-                            Console.WriteLine("s : Student number search\nS : Staff number search\nf : Studen name Search \nF : Staff name search \nR : Reinit the database\nl : Reload in-memory list of students/staff");
+                            Console.WriteLine("s : Student number search\nS : Staff number search\nf : Student name Search \nF : Staff name search \nR : Reinit the database\nl : Reload in-memory list of students/staff");
                             break;
                         case 'R':
                             Console.WriteLine("Reinitialize the database? Only use this if you have deleted the file! [N/y]?");
