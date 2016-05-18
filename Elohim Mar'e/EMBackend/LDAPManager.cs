@@ -36,37 +36,36 @@ namespace ElohimMare.EMBackend
                 Student s = new Student(); // creating a new student list
                 foreach (DictionaryEntry p in l.Properties)
                 {
-                    //Console.WriteLine(String.Format("{0}:{1}", p.Key, ((ResultPropertyValueCollection)p.Value)[0]));
-                    ResultPropertyValueCollection a = (ResultPropertyValueCollection)p.Value;
-                   // string value = "";
+
+                    var val = ((ResultPropertyValueCollection)p.Value)[0].ToString();
                     switch (p.Key.ToString())
                     {
                         case "uid":
-                            s.studentNumber = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.studentNumber = val;
                             break;
                         case "initials":
-                            s.initials = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.initials = val;
                             break;
                         case "mail":
-                            s.mail = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.mail = val;
                             break;
                         case "fullname":
-                            s.fullname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.fullname = val;
                             break;
                         case "sn":
-                            s.surname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.surname = val;
                             break;
                         case "allowunlimitedcredit":
-                            s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.allowUnlimitedCredit = Convert.ToBoolean(val);
                             break;
                         case "loginexpirationtime":
-                            s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.loginExpiration = Convert.ToDateTime(val);
                             break;
                         case "logindisabled":
-                            s.loginDisabled = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.loginDisabled = Convert.ToBoolean(val);
                             break;
                         case "accesscardnumber":
-                            s.accessCardNumber = Convert.ToInt32(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.accessCardNumber = Convert.ToInt32(val);
                             break;
                     }
                 }
@@ -92,46 +91,46 @@ namespace ElohimMare.EMBackend
                 Staff s = new Staff(); // creating a new staff list
                 foreach (DictionaryEntry p in l.Properties)
                 {
-             
-                    ResultPropertyValueCollection a = (ResultPropertyValueCollection)p.Value;
+
+                    var val = ((ResultPropertyValueCollection)p.Value)[0].ToString();
 
                     switch (p.Key.ToString())
                     {
                         case "uid":
-                            s.staffUID= ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.staffUID = val;
                             break;
                         case "initials":
-                            s.initials = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.initials = val;
                             break;
                         case "mail":
-                            s.mail = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.mail = val;
                             break;
                         case "fullname":
-                            s.fullname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.fullname = val;
                             break;
                         case "sn":
-                            s.surname = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.surname = val;
                             break;
                         case "ou":
-                            s.department = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.department = val;
                             break;
                         case "title":
-                            s.title = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.title = val;
                             break;
                         case "telephonenumber":
-                            s.telNumber = ((ResultPropertyValueCollection)p.Value)[0].ToString();
+                            s.telNumber = val;
                             break;
                         case "allowunlimitedcredit":
-                            s.allowUnlimitedCredit = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.allowUnlimitedCredit = Convert.ToBoolean(val);
                             break;
                         case "loginexpirationtime":
-                            s.loginExpiration = Convert.ToDateTime(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.loginExpiration = Convert.ToDateTime(val);
                             break;
                         case "logindisabled":
-                            s.loginDisabled = Convert.ToBoolean(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.loginDisabled = Convert.ToBoolean(val);
                             break;
                         case "accesscardnumber":
-                            s.accessCardNumber = Convert.ToInt32(((ResultPropertyValueCollection)p.Value)[0].ToString());
+                            s.accessCardNumber = Convert.ToInt32(val);
                             break;
                     }
                 }
