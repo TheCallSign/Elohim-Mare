@@ -79,13 +79,18 @@ namespace ElohimMare.EMBackend
                             {
                                 break;
                             }
-                            continue; 
+                            goto case 'r'; 
                         case 'r':
                             Console.WriteLine("Refreshing Student List with LDAP Server");
                             RefreshStudentList();
+                            RefreshStaffList();
                             foreach (Student s in studentList)
                             {
                                 dm.AddStudent(s);
+                            }
+                            foreach (Staff s in staffList)
+                            {
+                                dm.AddStaff(s);
                             }
                             Console.WriteLine(String.Format("There are {0} undergrad and postgrad students and {1} staff loaded.", studentList.Count, staffList.Count));
                             break;

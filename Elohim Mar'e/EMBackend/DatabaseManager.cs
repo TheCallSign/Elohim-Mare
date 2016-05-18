@@ -34,11 +34,11 @@ namespace ElohimMare.EMBackend
 
         public void Reinit()
         {
-            string sql = "DROP TABLE Students";
+            string sql = "DROP TABLE IF EXISTS Students";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
-            sql = "DROP TABLE Staff";
+            sql = "DROP TABLE IF EXISTS Staff";
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
             CreateTables();
