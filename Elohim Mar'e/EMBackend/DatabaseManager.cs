@@ -56,7 +56,7 @@ namespace ElohimMare.EMBackend
             command.ExecuteNonQuery();
         }
 
-        public List<Student> LoadStudents()
+        public List<Student> SearchStudents(string colName, string search)
         {
             return new List<Student>();
         }
