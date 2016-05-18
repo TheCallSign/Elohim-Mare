@@ -10,9 +10,15 @@ namespace ElohimMare.EMBackend
 {
     class DatabaseManager
     {
-        private const string DATABASE_PASSWORD = "AzGaGg6LXUyKGtrFACSp";
+        //private const string DATABASE_PASSWORD = "AzGaGg6LXUyKGtrFACSp";
         public const string DATABASE_NAME = "SightBase_data.db";
+<<<<<<< HEAD
         public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
+        //public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3";
+=======
+        //public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
+        public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3";
+>>>>>>> d717244c5f878d2518d3999cd781bcf8f3c81d95
 
         private SQLiteConnection conn;
 
@@ -23,7 +29,7 @@ namespace ElohimMare.EMBackend
                 SQLiteConnection.CreateFile(DATABASE_NAME);
                 conn = new SQLiteConnection(CONNECTION_STRING);
                 conn.Open();
-                conn.ChangePassword(DATABASE_PASSWORD);
+                //conn.ChangePassword(DATABASE_PASSWORD);
                 CreateTables();
             }
             else
