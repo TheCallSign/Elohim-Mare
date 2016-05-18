@@ -24,6 +24,7 @@ namespace ElohimMare.EMBackend
                 conn = new SQLiteConnection(CONNECTION_STRING);
                 conn.Open();
                 conn.ChangePassword(DATABASE_PASSWORD);
+                CreateTables();
             }
             else
             {
@@ -53,6 +54,11 @@ namespace ElohimMare.EMBackend
             sql = "CREATE TABLE Staff(uid VARCHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(35) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, title VARCHAR(50), telephone VARCHAR(25), department VARCHAR(40) )";
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
+        }
+
+        public List<Student> LoadStudents()
+        {
+            return new List<Student>();
         }
 
         public void AddStudent(Student s)
