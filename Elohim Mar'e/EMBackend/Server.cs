@@ -82,7 +82,7 @@ namespace ElohimMare.EMBackend
                             }
                             goto case 'r'; 
                         case 'r':
-                            Console.WriteLine("Refreshing Student List with LDAP Server");
+                            Console.WriteLine("\nRefreshing Student List with LDAP Server");
                             RefreshStudentList();
                             RefreshStaffList();
                             foreach (Student s in studentList)
