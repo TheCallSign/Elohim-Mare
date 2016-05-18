@@ -23,7 +23,7 @@ namespace ElohimMare.EMBackend
             DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://ldap.ru.ac.za/ou=STUDENT,o=RU", "", "", AuthenticationTypes.Anonymous); // directory of where are we looking in the ldap, logging in anonymously
             DirectorySearcher searcher = new DirectorySearcher(directoryEntry) // search through the directory
             {
-                PageSize = 500, //sets limit of entries to max integer value at a time
+                PageSize = 1000, //sets limit of entries at a time
                 Filter = "(&(objectClass=*))" // at the moment finds all students in ou=Student directory without any filters
             };
 
