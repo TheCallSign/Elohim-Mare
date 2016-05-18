@@ -10,9 +10,10 @@ namespace ElohimMare.EMBackend
 {
     class DatabaseManager
     {
-        private const string DATABASE_PASSWORD = "AzGaGg6LXUyKGtrFACSp";
+        //private const string DATABASE_PASSWORD = "AzGaGg6LXUyKGtrFACSp";
         public const string DATABASE_NAME = "SightBase_data.db";
-        public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
+        //public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
+        public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3";
 
         private SQLiteConnection conn;
 
@@ -23,7 +24,7 @@ namespace ElohimMare.EMBackend
                 SQLiteConnection.CreateFile(DATABASE_NAME);
                 conn = new SQLiteConnection(CONNECTION_STRING);
                 conn.Open();
-                conn.ChangePassword(DATABASE_PASSWORD);
+                //conn.ChangePassword(DATABASE_PASSWORD);
                 CreateTables();
             }
             else
@@ -58,6 +59,10 @@ namespace ElohimMare.EMBackend
 
         public List<Student> SearchStudents(string colName, string search)
         {
+            string sql = "SELECT * FROM TABLE Students WHERE ? LIKE ?";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.Parameters.Add(new SQLiteParameter());
+            command.ExecuteNonQuery();
             return new List<Student>();
         }
 
