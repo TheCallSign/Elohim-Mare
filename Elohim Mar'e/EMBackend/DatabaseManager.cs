@@ -13,6 +13,7 @@ namespace ElohimMare.EMBackend
         private const string DATABASE_PASSWORD = "AzGaGg6LXUyKGtrFACSp";
         public const string DATABASE_NAME = "SightBase_data.db";
         public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3;Password="+DATABASE_PASSWORD;
+        //public const string CONNECTION_STRING = "Data Source ="+ DATABASE_NAME + ";Version=3";
 
         private SQLiteConnection conn;
 
@@ -35,17 +36,17 @@ namespace ElohimMare.EMBackend
 
         public void Reinit()
         {
-            string sql = "DROP TABLE IF EXISTS Students";
+            string sql = "DROP TABLE  Students";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
-            sql = "DROP TABLE IF EXISTS Staff";
+            sql = "DROP TABLE Staff";
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
             CreateTables();
         }
 
-        private void CreateTables()
+        public void CreateTables()
         {
             string sql = "CREATE TABLE Students(StudentNumber CHAR(8) NOT NULL PRIMARY KEY, Surname VARCHAR(25) NULL, FullName VARCHAR(40) NULL, Initials VARCHAR(5) NULL, mail VARCHAR(30) NULL, loginExpiration DATETIME NULL, loginDisabled BIT NULL, accessCardNumber INT NULL, allowUnlimitedCredit BIT NULL, timetable VARCHAR(66) )";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
@@ -58,6 +59,10 @@ namespace ElohimMare.EMBackend
 
         public List<Student> SearchStudents(string colName, string search)
         {
+            string sql = "SELECT * FROM TABLE Students WHERE ? LIKE ?";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.Parameters.Add(new SQLiteParameter());
+            command.ExecuteNonQuery();
             return new List<Student>();
         }
 

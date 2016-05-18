@@ -68,12 +68,13 @@ namespace ElohimMare.EMBackend
                             Console.WriteLine("s : Student number search\nS : Staff number search\nf : Studen name Search \nF : Staff name search \nR : Reinit the database\nl : Reload in-memory list of students/staff");
                             break;
                         case 'R':
-                            Console.WriteLine("Reinitialize the database? [N/y]?");
+                            Console.WriteLine("Reinitialize the database? Only use this if you have deleted the file! [N/y]?");
                             char yn = 'n';
                             yn = Console.ReadKey().KeyChar;
                             if (yn == 'y' || yn == 'Y')
                             {
                                 dm.Reinit();
+                                dm = new DatabaseManager();
                             }
                             else
                             {
