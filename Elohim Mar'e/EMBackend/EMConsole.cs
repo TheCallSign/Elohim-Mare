@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,8 @@ namespace ElohimMare.EMBackend
             //}
             //Console.WriteLine(String.Format("There are {0} undergrad and postgrad students loaded.", studentList.Count));
             Console.WriteLine("Interactive interpreter ready. [h for help]");
+            int c = 0;
+            List<Student> students = dm.SearchStudents("studentnumber", ""); //
 
             char a = ' ';
             try
@@ -51,8 +54,39 @@ namespace ElohimMare.EMBackend
                     Console.WriteLine();
                     switch (a)
                     {
+                        case '1': // TODO: CHOOSE A LETTER FOR THIS FUNCTION!
+                            //stude = dm.SearchStudents("studentnumber", Console.ReadLine());                                //
+                            //if (students.Read())
+                            //    Console.WriteLine(students.GetValue((c < students.FieldCount ? c++ : c = 0)).ToString());
+                            //else Console.WriteLine("No results");
+                            break;
+                        case '2':   // TODO: CHOOSE A LETTER FOR THIS FUNCTION!
+                            c = 0;
+                            //students.Read();
+                            break;
+                        case '3':   // TODO: CHOOSE A LETTER FOR THIS FUNCTION!
+                            //Console.WriteLine(students.GetValue((c < students.FieldCount ? c++ : c = 0)).ToString());
+                            break;
                         case 's':
-                            Console.WriteLine(SearchStudentNumber(studentList, Console.ReadLine()));
+                            //Console.WriteLine(SearchStudentNumber(studentList, Console.ReadLine()));
+                            string fields = "studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable";
+                            Console.WriteLine("The following are valid fields: " + fields);
+                            Console.Write("Field name: ");
+                            string field = Console.ReadLine();
+                            if (!fields.ToLower().Contains(field.ToLower())){
+                                Console.WriteLine("Invalid field");
+                                break;
+                            }
+                            Console.Write("Search: ");
+                            string search = Console.ReadLine();
+                            var stu = dm.SearchStudents(field, search);
+                            StringBuilder sb = new StringBuilder();
+                            Console.WriteLine(string.Format("Found {0} students.", stu.Count));
+                            foreach (Student s in stu)
+                            {
+                                sb.Append("=> ").Append(s).Append("\n");
+                            }
+                            Console.WriteLine(sb.ToString());
                             break;
                         case 'S':
                             Console.WriteLine(SearchStaffNumber(staffList, Console.ReadLine()));
@@ -80,7 +114,7 @@ namespace ElohimMare.EMBackend
                             {
                                 break;
                             }
-                            goto case 'r'; 
+                            goto case 'r';
                         case 'r':
                             Console.WriteLine("\nRefreshing Student List with LDAP Server");
                             RefreshStudentList();

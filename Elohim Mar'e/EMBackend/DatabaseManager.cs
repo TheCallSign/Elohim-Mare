@@ -59,19 +59,38 @@ namespace ElohimMare.EMBackend
 
         public List<Student> SearchStudents(string colName, string search)
         {
-            string sql = "SELECT * FROM TABLE Students WHERE ? LIKE ?";
+            //string sql = "SELECT * FROM Students WHERE ? LIKE ?";
+            string sql = "SELECT * FROM Students WHERE studentnumber LIKE @search";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.Parameters.Add(new SQLiteParameter(colName));
-            command.Parameters.Add(new SQLiteParameter(search));
+            command.Parameters.Add(new SQLiteParameter("field", colName));
+            command.Parameters.Add(new SQLiteParameter("search", search + "%"));
             SQLiteDataReader reader = command.ExecuteReader();
-            
-            return new List<Student>();
+            List<Student> result = new List<Student>();
+            while (reader.Read())
+            {
+                Student s = new Student()
+                {
+                    studentNumber = reader.GetFieldValue<string>(0),
+                    surname = reader.GetFieldValue<string>(1),
+                    fullname = reader.GetFieldValue<string>(2),
+                    initials = reader.GetFieldValue<string>(3),
+                    mail = reader.GetFieldValue<string>(4),
+                    loginExpiration = reader.GetFieldValue<DateTime>(5),
+                    loginDisabled = reader.GetFieldValue<bool>(6),
+                    accessCardNumber = reader.GetFieldValue<int>(7),
+                    allowUnlimitedCredit = reader.GetFieldValue<bool>(8),
+                    timeTable = reader.GetFieldValue<string>(9)
+                };
+                result.Add(s);
+            }
+            return result;
         }
-
+        // http://stackoverflow.com/questions/418898/sqlite-upsert-not-insert-or-replace/4330694#4330694
         public void AddStudent(Student s)
         {
             SQLiteCommand command = conn.CreateCommand();
-            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            //command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            command.CommandText = "INSERT INTO students (studentnumber, surname, fullname, initials, mail, loginexpiration, logindisabled, accessCardNumber, allowUnlimitedCredit, timetable) VALUES (?,?,?,?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE";
             command.Parameters.Add(new SQLiteParameter("studentnumber", s.studentNumber));
             command.Parameters.Add(new SQLiteParameter("surname", s.surname));
             command.Parameters.Add(new SQLiteParameter("fullname", s.fullname));
@@ -84,7 +103,7 @@ namespace ElohimMare.EMBackend
             command.Parameters.Add(new SQLiteParameter("timetable", s.timeTable));
             command.ExecuteNonQuery();
         }
-
+        // http://stackoverflow.com/questions/418898/sqlite-upsert-not-insert-or-replace/4330694#4330694
         public void AddStaff(Staff s)
         {
             SQLiteCommand command = conn.CreateCommand();
