@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ElohimMare.EMBackend
 {
-    class Server
+    class EMConsole
     {
         private DatabaseManager dm;
         private LDAPManager ldapm;
         private List<Student> studentList = new List<Student>();
         private List<Staff> staffList = new List<Staff>();
 
-        public Server()
+        public EMConsole()
         {
             dm = new DatabaseManager();
             ldapm = new LDAPManager();

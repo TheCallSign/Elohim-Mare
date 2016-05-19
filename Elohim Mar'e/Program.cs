@@ -14,7 +14,7 @@ namespace ElohimMare
 
         static void Main(string[] args)
         {
-            Server server = new Server();
+            EMConsole server = new EMConsole();
             server.StartConsole();
             server.Shutdown();
         }

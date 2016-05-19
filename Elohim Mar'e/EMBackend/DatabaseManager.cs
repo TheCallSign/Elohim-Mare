@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -60,8 +61,10 @@ namespace ElohimMare.EMBackend
         {
             string sql = "SELECT * FROM TABLE Students WHERE ? LIKE ?";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.Parameters.Add(new SQLiteParameter());
-            command.ExecuteNonQuery();
+            command.Parameters.Add(new SQLiteParameter(colName));
+            command.Parameters.Add(new SQLiteParameter(search));
+            SQLiteDataReader reader = command.ExecuteReader();
+            
             return new List<Student>();
         }
 
