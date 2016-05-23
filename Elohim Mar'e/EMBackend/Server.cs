@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AustinHarris.JsonRpc;
+using System.IO;
+using System.Net.Sockets;
+using System.Net;
 
 namespace ElohimMare.EMBackend
 {
