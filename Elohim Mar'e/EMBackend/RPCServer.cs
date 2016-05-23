@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElohimMare.Server
+namespace ElohimMare.EMBackend
 {
-    class Packet
+    class RPCServer
     {
     }
 }

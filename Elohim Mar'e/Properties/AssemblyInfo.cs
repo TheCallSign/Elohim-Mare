@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Elohim Mar'e")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Core4")]
 [assembly: AssemblyProduct("Elohim Mar'e")]
 [assembly: AssemblyCopyright("Copyright Core4 ©  2016")]
 [assembly: AssemblyTrademark("")]
